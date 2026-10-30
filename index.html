@@ -1,0 +1,716 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Paradise | Online Pet Store</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #fffaf5;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 15px #00000010;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    color: #ff7043;
+}
+
+.logo span {
+    color: #333;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #ff7043;
+}
+
+.cart {
+    background: #ff7043;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hero {
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 8%;
+    background: linear-gradient(120deg, #fff0e5, #ffe0d0);
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 520px;
+    animation: slideIn 1s ease;
+}
+
+.hero h1 {
+    font-size: 55px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #ff7043;
+}
+
+.hero p {
+    font-size: 17px;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.primary-btn {
+    background: #ff7043;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .3s;
+}
+
+.primary-btn:hover {
+    background: #e85a30;
+    transform: translateY(-4px);
+}
+
+.hero-image {
+    font-size: 190px;
+    animation: float 3s ease-in-out infinite;
+}
+
+section {
+    padding: 75px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #888;
+    margin-bottom: 35px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.category-btn {
+    padding: 11px 24px;
+    border: 1px solid #ff7043;
+    color: #ff7043;
+    background: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.category-btn.active,
+.category-btn:hover {
+    background: #ff7043;
+    color: white;
+}
+
+.search-box {
+    display: block;
+    width: min(100%, 420px);
+    margin: 0 auto 30px;
+    padding: 14px 20px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    font-size: 15px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px #0000000c;
+    transition: .4s;
+    animation: fadeUp .7s ease both;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px #ff704330;
+}
+
+.product-img {
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff0e5;
+    overflow: hidden;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .4s;
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.08);
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-info h3 {
+    margin-bottom: 8px;
+}
+
+.product-info p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.price {
+    color: #ff7043;
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #ff7043;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.add-btn:hover {
+    background: #333;
+}
+
+.no-results {
+    text-align: center;
+    color: #888;
+    grid-column: 1 / -1;
+    padding: 30px;
+}
+
+.about {
+    background: #fff0e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.about-content {
+    flex: 1;
+    min-width: 250px;
+}
+
+.about-content h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    color: #666;
+    line-height: 1.8;
+}
+
+.about-icon {
+    font-size: 140px;
+    animation: float 3s infinite;
+}
+
+.contact {
+    text-align: center;
+}
+
+.contact p {
+    margin: 15px;
+    color: #777;
+}
+
+footer {
+    background: #282828;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    max-width: 90%;
+    height: 100%;
+    background: white;
+    z-index: 200;
+    padding: 25px;
+    box-shadow: -5px 0 20px #0002;
+    transition: .4s;
+    overflow-y: auto;
+}
+
+.cart-panel.open {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.close-btn {
+    border: none;
+    background: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.cart-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.remove-btn {
+    color: #e85a30;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.cart-total {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.checkout {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: #ff7043;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .hero {
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero-image {
+        font-size: 130px;
+    }
+
+    .about {
+        text-align: center;
+        justify-content: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🐾 Pet<span>Paradise</span></div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#pets">Pets</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="cart" onclick="toggleCart()">
+        🛒 Cart (<span id="cart-count">0</span>)
+    </button>
+</header>
+
+<div class="hero" id="home">
+    <div class="hero-content">
+        <h1>Find Your New <span>Best Friend!</span></h1>
+        <p>
+            Welcome to Pet Paradise! Discover adorable pets,
+            delicious pet food and everything your little
+            companions need to stay happy and healthy.
+        </p>
+        <button class="primary-btn"
+        onclick="document.getElementById('pets').scrollIntoView()">
+            Explore Products →
+        </button>
+    </div>
+
+    <div class="hero-image">🐶</div>
+</div>
+
+<section id="pets">
+    <h2 class="section-title">Explore Our Collection</h2>
+    <p class="subtitle">Everything your furry friends need!</p>
+
+    <div class="categories">
+        <button class="category-btn active"
+        onclick="filterProducts('All',this)">All</button>
+
+        <button class="category-btn"
+        onclick="filterProducts('Dogs',this)">Dogs</button>
+
+        <button class="category-btn"
+        onclick="filterProducts('Cats',this)">Cats</button>
+
+        <button class="category-btn"
+        onclick="filterProducts('Birds',this)">Birds</button>
+
+        <button class="category-btn"
+        onclick="filterProducts('Fish',this)">Fish</button>
+    </div>
+
+    <input type="text" class="search-box"
+    id="search" placeholder="🔍 Search products..."
+    oninput="searchProducts()">
+
+    <div class="products" id="product-list"></div>
+</section>
+
+<section class="about" id="about">
+    <div class="about-content">
+        <h2>We Care About Your Pets ❤️</h2>
+        <p>
+            At Pet Paradise, we believe every pet deserves
+            love, care and happiness. Our goal is to provide
+            quality products and make pet parenting easier.
+            From nutritious food to fun accessories,
+            we have everything in one place.
+        </p>
+    </div>
+    <div class="about-icon">🐕</div>
+</section>
+
+<section class="contact" id="contact">
+    <h2 class="section-title">Get In Touch</h2>
+    <p>Have questions? We would love to hear from you!</p>
+    <p>📧 Email: support@petparadise.com</p>
+    <p>📞 Phone: +91 98765 43210</p>
+    <p>📍 Location: Andhra Pradesh, India</p>
+</section>
+
+<footer>
+    <p>© 2026 Pet Paradise. Made with ❤️ for Pet Lovers.</p>
+</footer>
+
+<div class="cart-panel" id="cart-panel">
+    <div class="cart-header">
+        <h2>🛒 Your Cart</h2>
+        <button class="close-btn" onclick="toggleCart()">×</button>
+    </div>
+
+    <div id="cart-items"></div>
+    <div class="cart-total" id="cart-total">Total: ₹0</div>
+    <button class="checkout" onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+const products = [
+    {
+        id: 1,
+        name: "Golden Retriever",
+        category: "Dogs",
+        price: 15000,
+        description: "Friendly and playful companion.",
+        image: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=500"
+    },
+    {
+        id: 2,
+        name: "Persian Cat",
+        category: "Cats",
+        price: 12000,
+        description: "Cute and fluffy little friend.",
+        image: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500"
+    },
+    {
+        id: 3,
+        name: "Parrot",
+        category: "Birds",
+        price: 2500,
+        description: "Beautiful and colorful bird.",
+        image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=500"
+    },
+    {
+        id: 4,
+        name: "Aquarium Fish",
+        category: "Fish",
+        price: 500,
+        description: "Colorful fish for your aquarium.",
+        image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=500"
+    },
+    {
+        id: 5,
+        name: "Puppy Food",
+        category: "Dogs",
+        price: 850,
+        description: "Nutritious food for puppies.",
+        image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=500"
+    },
+    {
+        id: 6,
+        name: "Cat Food",
+        category: "Cats",
+        price: 650,
+        description: "Healthy food for lovely cats.",
+        image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=500"
+    },
+    {
+        id: 7,
+        name: "Bird Cage",
+        category: "Birds",
+        price: 1800,
+        description: "Comfortable bird cage.",
+        image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=500"
+    },
+    {
+        id: 8,
+        name: "Fish Tank",
+        category: "Fish",
+        price: 2200,
+        description: "Beautiful aquarium for fish.",
+        image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=500"
+    }
+];
+
+let cart = [];
+let currentCategory = "All";
+
+function displayProducts(items) {
+    const container = document.getElementById("product-list");
+
+    if (items.length === 0) {
+        container.innerHTML = '<p class="no-results">No products found.</p>';
+        return;
+    }
+
+    container.innerHTML = items.map(product => `
+        <div class="product-card">
+            <div class="product-img">
+                <img src="${product.image}"
+                alt="${product.name}"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <div class="price">₹${product.price.toLocaleString("en-IN")}</div>
+                <button class="add-btn"
+                onclick="addToCart(${product.id})">
+                    Add to Cart +
+                </button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function filterProducts(category, button) {
+    currentCategory = category;
+
+    document.querySelectorAll(".category-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+    searchProducts();
+}
+
+function searchProducts() {
+    const search = document.getElementById("search")
+    .value.toLowerCase();
+
+    const filtered = products.filter(product => {
+        const matchesCategory =
+            currentCategory === "All" ||
+            product.category === currentCategory;
+
+        const matchesSearch =
+            product.name.toLowerCase().includes(search) ||
+            product.description.toLowerCase().includes(search);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    displayProducts(filtered);
+}
+
+function addToCart(id) {
+    const product = products.find(item => item.id === id);
+    const existing = cart.find(item => item.id === id);
+
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({...product, quantity: 1});
+    }
+
+    updateCart();
+
+    alert(product.name + " added to your cart!");
+}
+
+function updateCart() {
+    const count = cart.reduce((sum, item) =>
+        sum + item.quantity, 0);
+
+    document.getElementById("cart-count").textContent = count;
+
+    const container = document.getElementById("cart-items");
+
+    if (cart.length === 0) {
+        container.innerHTML = "<p>Your cart is empty!</p>";
+    } else {
+        container.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <div>
+                    <strong>${item.name}</strong><br>
+                    ₹${item.price.toLocaleString("en-IN")} × ${item.quantity}
+                </div>
+                <button class="remove-btn"
+                onclick="removeItem(${item.id})">Remove</button>
+            </div>
+        `).join("");
+    }
+
+    const total = cart.reduce((sum, item) =>
+        sum + item.price * item.quantity, 0);
+
+    document.getElementById("cart-total").textContent =
+        "Total: ₹" + total.toLocaleString("en-IN");
+}
+
+function removeItem(id) {
+    cart = cart.filter(item => item.id !== id);
+    updateCart();
+}
+
+function toggleCart() {
+    document.getElementById("cart-panel")
+    .classList.toggle("open");
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    alert("Thank you for shopping with Pet Paradise! This is a demo checkout.");
+    cart = [];
+    updateCart();
+    toggleCart();
+}
+
+displayProducts(products);
+updateCart();
+</script>
+
+</body>
+</html>
